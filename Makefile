@@ -21,6 +21,11 @@ POD_DELETE_FORCE ?= false
 
 AZ_DOWN_DRY_RUN ?= false
 
+.PHONY: test/alertscenarios/under_replicated_partition
+test/alertscenarios/under_replicated_partition:
+	@echo "Running under-replicated-partitions scenario alert..."
+	@python3 alertscenarios/under_replicated_partitions.py
+    
 .PHONY: create/operator/litmus
 create/operator/litmus:
 	@echo "create operator: litmus"
@@ -121,6 +126,10 @@ create/chaosengine/az-down:
 .PHONY: test/critical-alerts
 test/critical-alerts:
 	@python3 ./scripts/fault-test.py $(LITMUS_NS) $(CLUSTER_PROMETHEUS_NS) $(PROMETHEUS_SCRAPE_INTERVAL)
+
+.PHONY: test/all-alerts
+test/all-alerts:
+	@python3 scripts/monitor_alerts.py
 
 .PHONY: uninstall/operator/chaosscheduler
 uninstall/operator/chaosscheduler:

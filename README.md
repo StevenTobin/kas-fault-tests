@@ -25,6 +25,9 @@ All required resources to deploy the ChaosScheduler operator are included in the
 
 Prebuilt ChaosSchedule CRs are located in the `./chaosschedules` directory.
 
+### AlertScenarios
+
+Automated scenarios to recreate the conditions for an alert to be triggered. It consists on a set of Python scripts from `./alertscenarios` with steps. The output from every scenario is SUCCESS when the alert is triggered or FAILED if not.
 
 ## Setup
 
@@ -94,12 +97,24 @@ oc get chaosresult -n litmus
 # check status of chaosresult
 oc get chaosresult <chaosresult-name> -o json | jq '.status.experimentstatus'
 ```
+## Running Alert testing scenarios
 
+```sh
+make test/alertscenarios/under_replicated_partition
+```
 
-### Prometheus alerts
+## Prometheus alerts
 
+### Get critical alerts
 An automated test and make target exist to monitor prometheus for any critical alerts that fire during chaos experiments:
 
 ```sh
 make test/critical-alerts
+```
+
+### Get all alerts
+An automated script to get all the current Prometheus alerts
+
+```sh
+make test/all-alerts
 ```
