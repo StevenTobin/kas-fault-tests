@@ -21,8 +21,8 @@ POD_DELETE_FORCE ?= false
 
 AZ_DOWN_DRY_RUN ?= false
 
-.PHONY: test/alertscenarios/under_replicated_partition
-test/alertscenarios/under_replicated_partition:
+.PHONY: test/alertscenarios/under_replicated_partitions
+test/alertscenarios/under_replicated_partitions:
 	@echo "Running under-replicated-partitions scenario alert..."
 	@python3 alertscenarios/under_replicated_partitions.py
     
